@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/gerald-Hunter/Navbar.git",
+  "homepage": "https://gerald-Hunter.github.io/Navbar",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -1,56 +1,70 @@
-import { Menu, MessageCircle, Shield, X } from "lucide-react";
-import App from "./App";
+import { ChevronDown, ChevronUp, List, Menu, X } from "lucide-react";
 import { useState } from "react";
+import App from "./App";
 
 function Navbar() {
-    const [Collapse, setCollapse] = useState(false)
-    const [CollapseBtn, setCollapseBtn] = useState(false)
-
+    const [collapse, setCollapse] = useState(false)
+    const [dropDown, setdropDown] = useState(false)
+    const [ddActive, setddActive] = useState(null)
+    const links = ["Home", "About", "Service", "Contact"]
+    const dropDownLinks = ["Link", "Another link", "A third link"]
     return (
-        <nav className="bg-black inter-400 w-full fixed z-40 top-0 left-0">
-            <div className="flex justify-between items-center text-gray-300 px-10 w-full min-h-20">
-                <a href={App} className="text-2xl">Gerald</a>
-                <button
-                    onClick={() => {
-                        setCollapse(!Collapse),
-                            setCollapseBtn(!CollapseBtn)
-                    }}
-                    className="block text-gray-300 md:hidden">
-                    {CollapseBtn ? <X /> : <Menu />}
-                </button>
+        <body className="bg-gray-100">
+            <nav className="bg-gray-900 text-white w-full fixed z-50 left-0 top-0">
+                <div className="px-8 py-4 flex justify-between items-center">
+                    <a href={App} className="text-2xl">Logo</a>
 
-                <ul className="hidden md:flex space-x-8">
+                    {/* COllpase Btn */}
+                    <button
+                        className="md:hidden"
+                        onClick={() => setCollapse(!collapse)}>
+                        {
+                            collapse ? <X /> : <Menu />
+                        }
+                    </button>
 
-                    <li><a href="#" className="block text-gray-300 text-lg">Home</a></li>
-                    <li><a href="#" className="block text-gray-300 text-lg">About</a></li>
-                    <li><a href="#" className="block text-gray-300 text-lg">Services</a></li>
-                    <li><a href="#" className="block text-gray-300 text-lg">Contact</a></li>
-                </ul>
+                    {/* Desktop Link */}
+                    <ul className="hidden md:flex space-x-5 items-center justify-center">
+                        {links.map((link, index) => (
+                            <li><a href="" className="">{link}</a></li>
+                        ))}
+                        <li><a
+                            onClick={() => setdropDown(!dropDown)}
+                            className="inline-flex items-center">Dropdown {dropDown ? <ChevronUp size={20} className="mt-0.5" /> : <ChevronDown size={20} className="mt-0.75" />}</a>
+                            {dropDown && (
+                                <ul className="absolute bg-gray-200 border border-gray-400 w-fit min-w-60 rounded-xl py-2 mt-3 right-6 text-md">{dropDownLinks.map((dropDownLink, index) => (
+                                    <li
+                                        key={index}><a
+                                            href="#"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setddActive(ddActive === index ? null : index)
+                                            }}
+                                            className={`top-3 text-black block px-6 py-2  ${ddActive === index ? "bg-blue-500 text-white" : "hover:bg-gray-300"}`}>{dropDownLink}</a></li>
+                                ))}</ul>
+                            )}
+                        </li>--
+                    </ul>
+                </div>
+                {collapse && (
 
-            </div>
-            {
-                Collapse && (
-                    <div className="w-full h-screen">
-                        <ul className="px-6 space-y-3 pb-5 mx-36 mt-5">
-                            <li><a href="#" className="block text-gray-300 text-lg border-b py-3">Home</a></li>
-                            <li><a href="#" className="block text-gray-300 text-lg border-b py-3">About</a></li>
-                            <li><a href="#" className="block text-gray-300 text-lg border-b py-3">Services</a></li>
-                            <li><a href="#" className="block text-gray-300 text-lg border-b py-3">Contact</a></li>
-                            <li><input
-                                className="bg-white p-3 rounded-md w-full mt-5"
-                                placeholder="Search"
-                                type="text" /></li>
+                    <ul className="space-y-6 p-8 py-5 text-lg md:hidden">
+                        {links.map((link, index) => (
                             <li>
-                                <div className="text-white flex justify-center gap-3 mt-5">
-                                    <MessageCircle />
-                                    <Shield />
-                                </div>
+                                <a href="" className="text-gray-400  hover:text-white">{link}</a>
                             </li>
-                        </ul>
-                    </div>
-                )
-            }
-        </nav>
+                        ))}
+                        <input
+                            placeholder="Search"
+                            className="text-black bg-white p-3 rounded-lg w-full  placeholder:text-gray-500" />
+                        <div className="text-white flex justify-center gap-3 mt-5">
+                            <MessageCircle />
+                            <Shield />
+                        </div>
+                    </ul>
+                )}
+            </nav>
+        </body>
     )
 }
 
