@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronUp, List, Menu, X } from "lucide-react";
+import { ChevronDown, ChevronUp, List, Menu, X, MessageCircle, Shield} from "lucide-react";
 import { useState } from "react";
 import App from "./App";
 
@@ -43,7 +43,7 @@ function Navbar() {
                                             className={`top-3 text-black block px-6 py-2  ${ddActive === index ? "bg-blue-500 text-white" : "hover:bg-gray-300"}`}>{dropDownLink}</a></li>
                                 ))}</ul>
                             )}
-                        </li>--
+                        </li>
                     </ul>
                 </div>
                 {collapse && (
@@ -54,9 +54,6 @@ function Navbar() {
                                 <a href="" className="text-gray-400  hover:text-white">{link}</a>
                             </li>
                         ))}
-                        <input
-                            placeholder="Search"
-                            className="text-black bg-white p-3 rounded-lg w-full  placeholder:text-gray-500" />
                         <div className="text-white flex justify-center gap-3 mt-5">
                             <MessageCircle />
                             <Shield />
